@@ -4,10 +4,9 @@ local keymap = vim.keymap -- this var for kemaps glob
 
 -- clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
-
-keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "clear the highlights" })
 keymap.set("n", "<leader>+", "<C-a>", { desc = "increment the number by one" })
 keymap.set("n", "<leader>-", "<C-x>", { desc = "subtract the number by one" })
+keymap.set("n", "<C-a>", "ggVG", { desc = "select all" })
 
 -- window management
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
