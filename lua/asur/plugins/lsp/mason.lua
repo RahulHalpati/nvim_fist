@@ -1,19 +1,14 @@
 return {
 	"williamboman/mason.nvim",
+	lazy = false, -- Load at startup
+	priority = 1000, -- Load this first
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
-		-- import mason
+		-- Setup mason first
 		local mason = require("mason")
-
-		-- import mason-lspconfig
-		local mason_lspconfig = require("mason-lspconfig")
-
-		local mason_tool_installer = require("mason-tool-installer")
-
-		-- enable mason and configure icons
 		mason.setup({
 			ui = {
 				icons = {
@@ -24,10 +19,12 @@ return {
 			},
 		})
 
+		-- Then setup mason-lspconfig
+		local mason_lspconfig = require("mason-lspconfig")
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				"tsserver",
+				"tsserver", -- TypeScript/JavaScript (renamed to ts_ls in newer versions)
 				"html",
 				"cssls",
 				"tailwindcss",
@@ -38,8 +35,11 @@ return {
 				"prismals",
 				"pyright",
 			},
+			automatic_installation = true,
 		})
 
+		-- Finally setup mason-tool-installer
+		local mason_tool_installer = require("mason-tool-installer")
 		mason_tool_installer.setup({
 			ensure_installed = {
 				"prettier", -- prettier formatter
